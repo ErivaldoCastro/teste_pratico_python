@@ -11,7 +11,7 @@ PORT = "3306"
 
 CONN = f"mysql+pymysql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
 
-engine = create_engine(CONN, echo=True)
+engine = create_engine(CONN, echo=False)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
