@@ -30,7 +30,7 @@ session = RetornaSession()
 
 tabela = pd.read_csv(r'arquivo_exemplo.csv', encoding = "ISO-8859-1", sep=';')
 
-
+print(tabela)
 #Alterar formato da data para padrão EUA
 transformar_padrao_data(tabela,'Data de Emissão')
 transformar_padrao_data(tabela,'Data de Vencimento')
@@ -40,16 +40,25 @@ transformar_padrao_data(tabela,'Data de Compra CCB')
 #Tirar as mascaras CPF/CNPJ
 tirar_mascara(tabela,'CPF/CNPJ')
 
-#Savar no banco de dados
-for i in tabela.itertuples(index=False):
 
-    x = Empresa(Originador=i.Originador,Doc_Originador=i._1,Cedente=i.Cedente,Doc_Cedente=i._3,
-    Ccb=i.CCB,Id_cliente=i.Id,Cliente=i.Cliente,Cpf_cnpj=i._7,Endereço=i.Endereço,Cep=i.CEP,
-    Cidade=i.Cidade,Uf=i.UF,Valor_do_emprestimo=i._12,Taxa_de_juros=i._13,Parcela_em_reais=i._14,
-    Principal=i._15,Juros=i._16,Iof=i._17,Comissao=i._18,Total_parcelas=i._19,Parcelas=i._20,Multa=i.Multa,
-    Mora=i.Mora,Data_de_emissao=i._23,Data_de_vencimento=i._24,Data_de_compra=i._25,preco_de_aquisicao=i._26)
+tabela_depara = pd.read_excel(r"C:\Users\eriva\Documents\GitHub\teste_csv\depara.xlsx")
+
+tabela_csv = tabela_depara['Unnamed: 1'][3:22]
+
+tabela_banco = tabela_depara['Unnamed: 2'][3:22]
+
+#Savar no banco de dados
+
+
+for i in tabela.itertuples(index=False):
+    
+    x = Empresa(ORIGINADOR=i.Originador,DOC_ORIGINADOR=i._1,CEDENTE=i.Cedente,DOC_CEDENTE=i._3,
+    CCB=i.CCB,ID_EXTERNO=i.Id,CLIENTE=i.Cliente,CPF_CNPJ=i._7,ENDERECO=i.Endereço,CEP=i.CEP,
+    CIDADE=i.Cidade,UF=i.UF,VALOR_DO_EMPRESTIMO=i._12,VALOR_PARCELA=i._14,
+    TOTAL_PARCELAS=i._19,PARCELA=i._20,DATA_DE_EMISSAO=i._23,DATA_DE_VENCIMENTO=i._24,PRECO_DE_AQUISICAO=i._26)
     session.add(x)
     session.commit()
+
 
 
 
