@@ -48,8 +48,6 @@ tabela_csv = tabela_depara['Unnamed: 1'][3:22]
 tabela_banco = tabela_depara['Unnamed: 2'][3:22]
 
 #Savar no banco de dados
-
-
 for i in tabela.itertuples(index=False):
     
     x = Empresa(ORIGINADOR=i.Originador,DOC_ORIGINADOR=i._1,CEDENTE=i.Cedente,DOC_CEDENTE=i._3,
