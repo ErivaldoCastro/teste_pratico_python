@@ -1,30 +1,6 @@
 import pandas as pd
 from funcoes import transformar_padrao_data,tirar_mascara
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from bd import Empresa
 
-
-
-
-def RetornaSession():
-    USUARIO = "root"
-    SENHA = ""
-    HOST = "localhost"
-    BANCO = "testepython"
-    PORT = "3306"
-
-    CONN = f"mysql+pymysql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
-
-    engine = create_engine(CONN, echo=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    Base = declarative_base()
-    return Session()
-
-
-session = RetornaSession()
 
 
 
@@ -47,7 +23,12 @@ tabela_csv = tabela_depara['Unnamed: 1'][3:22]
 
 tabela_banco = tabela_depara['Unnamed: 2'][3:22]
 
+
+print(tabela_banco)
+
+
 #Savar no banco de dados
+'''
 for i in tabela.itertuples(index=False):
     
     x = Empresa(ORIGINADOR=i.Originador,DOC_ORIGINADOR=i._1,CEDENTE=i.Cedente,DOC_CEDENTE=i._3,
@@ -56,7 +37,7 @@ for i in tabela.itertuples(index=False):
     TOTAL_PARCELAS=i._19,PARCELA=i._20,DATA_DE_EMISSAO=i._23,DATA_DE_VENCIMENTO=i._24,PRECO_DE_AQUISICAO=i._26)
     session.add(x)
     session.commit()
-
-
+        
+'''
 
 
